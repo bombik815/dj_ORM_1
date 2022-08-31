@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Каталог книг{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <h1><a href="/books">Каталог</a></h1>
+        </div>
+        <div class="row">
+            {% for book in data.object_list %}
+
+                <div class="book col-md-4">
+                   <h2> {{book.name|linebreaks}} </h2>
+                    <p>Автор: {{book.author}}</p>
+                    <p>Дата публикации: {{book.pub_date|date:'Y-m-d'}}</p>
+
+                </div>
+
+        {% endfor %}
+        </div>
+    <div class="row">
+            <a {% if prev %} href="{% url 'detail' prev %}" class="btn  btn-primary pull-left"
+               {% else %}
+               class="btn btn-primary pull-left disabled"
+               {% endif %} >{{ prev|date:'Y-m-d' }} </a>
+
+
+            <a {% if next %} href="{% url 'detail' next %}" class="btn btn-primary pull-right"
+               {% else %}
+               class="btn btn-primary pull-right disabled"
+               {% endif %}>{{ next|date:'Y-m-d' }}</a>
+
+
+</div>
+
+    </div>
+
+{% endblock %}
